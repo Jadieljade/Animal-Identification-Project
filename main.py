@@ -20,14 +20,14 @@ def home():
 
 @app.route('/predict', methods=['POST'])
 def predict():
-    # Load the uploaded image
+    # Loading the uploaded image
     image = request.files['image'].read()
     nparr = np.frombuffer(image, np.uint8)
     img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
     img = cv2.resize(img, None, fx=0.4, fy=0.4)
     height, width, channels = img.shape
 
-    # Detect objects using YOLO
+    # Detecting objects using YOLO
     blob = cv2.dnn.blobFromImage(
         img, 0.00392, (416, 416), (0, 0, 0), True, crop=False)
     net.setInput(blob)
@@ -74,3 +74,7 @@ def predict():
 
     # Render the response on web page
     return render_template('result.html', detected_objects=detected_objects)
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
