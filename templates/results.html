@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <h1>Animal Detection Results</h1>
+    <div>
+      {% for obj in detected_objects %}
+      <p>
+        Object: {{ obj.label }}<br />
+        Confidence: {{ obj.confidence }}<br />
+        Bounding Box: x={{ obj.x }}, y={{ obj.y }}, w={{ obj.w }}, h={{ obj.h }}
+      </p>
+      {% endfor %}
+    </div>
+    <a href="/">Back to Home</a>
+  </body>
+</html>
